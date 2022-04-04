@@ -14,6 +14,7 @@ In case you want to contribute to Delta by providing icons please do so by creat
 	```json
 		{
 			// example_app.png will be renamed to example_app_alt_xx.png automatically and example_app.svg converted to replace it
+			// make sure the icons share the same name, if anything goes wrong we will have the previous version in the git history
 			"update_drawable": "example_app"
 		}
 	```
@@ -44,4 +45,5 @@ Usage notes:
 [Now](https://www.1001fonts.com/now-font.html) (Use Now Alt from the same family for alternate lowercase "a")
 
 ### Gathering ComponentInfo from apps
-[Icon Pusher](https://iconpusher.com/) by southpaw.dev
+- [Icon Pusher](https://iconpusher.com/) by southpaw.dev
+- [Icon Request](https://github.com/Kaiserdragon2/IconRequest/releases) by [Kaiserdragon2](https://github.com/Kaiserdragon2)
