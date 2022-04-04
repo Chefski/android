@@ -48,4 +48,7 @@ captures/
 .project
 new_drawable.xml
 
+*.eml
+utility_scripts/emails/*
+theme_resources.xml
 __pycache__
