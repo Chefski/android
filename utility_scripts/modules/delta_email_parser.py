@@ -138,7 +138,8 @@ Last requested {reqDate}
                     objectBlock.format(
                         name=values["Name"],
                         component=values["ComponentInfo"],
-                        packageName=values["ComponentInfo"][0: values["ComponentInfo"].index('/')],
+                        packageName=values["ComponentInfo"]
+                        [0: values["ComponentInfo"].index('/')],
                         count=values["count"],
                         reqDate=values["requestDate"],))
             elif appfilter.find(componentInfo) != -1 and ''.join(updatable).find(componentInfo) == -1:
@@ -167,10 +168,12 @@ def writeOutput(requests_file, updatable_file):
 
 def main(e_mail_folder, requests_file, updatable_file, appfilter_file,
          request_limit, months_limit, min_requests):
+    global apps
     parseExisting(requests_file)
     filterOld(months_limit, min_requests)
     parseMails(e_mail_folder, request_limit)
-    sorted(apps.values(), key=lambda item: item['count'], reverse=True)
+    # sorted(apps.values(), key=lambda item: item['count'], reverse=True)
+    apps = dict(sorted(apps.items(), key=lambda item: item[1]["count"], reverse=True))
     separateupdatable(appfilter_file)
     writeOutput(requests_file, updatable_file)
 

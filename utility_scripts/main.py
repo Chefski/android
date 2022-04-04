@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from msilib.schema import DuplicateFile
 from multiprocessing.spawn import prepare
 from modules.delta_email_parser import main as parse_mails
@@ -18,7 +20,7 @@ update_requests - parses the email folder and updates requests.txt
 prepare_release - parses contributions.json, converts svgs to png, renames icons that get demoted to _alt, merges new drawables and updates xml files
 """
 
-# CONSTANTS
+# CONSTANTS (skip slash at the end of paths)
 CONTRIBUTIONS_PATH = '../contributions.json'
 SVG_FOLDER = '../contributed-vectors'
 DRAWABLE_PATH = '../app/src/main/res/xml/drawable.xml'
@@ -66,6 +68,7 @@ def prepare_release():
     duplicate_file(DRAWABLE_PATH, DRAWABLE_CLONE_PATH)
     create_updated_appfilters(APPFILTER_PATH, contributions)
     duplicate_file(APPFILTER_PATH, APPFILTER_CLONE_PATH)
+	# create_theme_resources(APPFILTER_PATH) #lets see if we even need this
 
 
 if __name__ == "__main__":

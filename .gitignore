@@ -47,3 +47,5 @@ captures/
 
 .project
 new_drawable.xml
+
+__pycache__

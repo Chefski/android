@@ -1,2 +1,2 @@
-CairoSVG
-BeautifulsSoup
+svglib
+beautifulsoup4
