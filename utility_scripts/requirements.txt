@@ -1,3 +1,3 @@
-svglib
 beautifulsoup4
 iteration_utilities
+pyvips

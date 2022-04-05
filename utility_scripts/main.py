@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 
+# make sure to run "pip install -r requirements.txt" before running this script
+#
+# you'll need libvips for this, which can be installed by the docs at:
+# https://www.libvips.org/install.html
+
 from msilib.schema import DuplicateFile
 from multiprocessing.spawn import prepare
 from modules.delta_email_parser import main as parse_mails
 from modules.merge_new_drawables import main as merge_drawables
 from modules.create_updated_appfilters import main as create_updated_appfilters
-from modules.svg_conversion import main as convertSVG
+from modules.svg_conversion import main as convert_svg
 from modules.move_outdated_drawables import main as move_outdated_drawables
 from sys import argv
 import json
-
-# make sure to run "pip install -r requirements.txt" before running this script
 
 usage = """
 Usage:
@@ -47,7 +50,7 @@ def parse_contributions(contributions_path):
         data = json.load(f)
         return {
             "new": [x for x in data if "drawable" in x],
-            "to_update": [x for x in data if "update_drawable" in x],
+            "to_update": [x["update_drawable"] for x in data if "update_drawable" in x],
         }
 
 
@@ -61,17 +64,21 @@ def update_requests():
 
 def prepare_release():
     contributions = parse_contributions(CONTRIBUTIONS_PATH)
-    renamed_drawables = move_outdated_drawables(
-        DRAWABLE_PATH, contributions["to_update"], PNG_OUTPUT_FOLDER)
+    # renamed_drawables = move_outdated_drawables(
+    #     DRAWABLE_PATH, contributions["to_update"], PNG_OUTPUT_FOLDER)
+    renamed_drawables = []
     new_drawables = contributions["new"] + renamed_drawables
-    print(new_drawables)
     # print("Converting svgs to png...")
-    # convertSVG(SVG_FOLDER, DRAWABLE_PATH, new_drawables)
-    # merge_drawables(DRAWABLE_PATH, new_drawables)
+    # convert_svg(
+    #     SVG_FOLDER, PNG_OUTPUT_FOLDER,
+    #     [x["drawable"] for x in contributions["new"]] +
+    #     contributions["to_update"])
+    merge_drawables(DRAWABLE_PATH, new_drawables)
     # duplicate_file(DRAWABLE_PATH, DRAWABLE_CLONE_PATH)
     # create_updated_appfilters(APPFILTER_PATH, contributions)
     # duplicate_file(APPFILTER_PATH, APPFILTER_CLONE_PATH)
     # create_theme_resources(APPFILTER_PATH) #lets see if we even need this
+    # clean contributions.json
 
 
 if __name__ == "__main__":
