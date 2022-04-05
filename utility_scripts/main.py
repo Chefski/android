@@ -64,21 +64,25 @@ def update_requests():
 
 def prepare_release():
     contributions = parse_contributions(CONTRIBUTIONS_PATH)
-    # renamed_drawables = move_outdated_drawables(
-    #     DRAWABLE_PATH, contributions["to_update"], PNG_OUTPUT_FOLDER)
+    renamed_drawables = move_outdated_drawables(
+        DRAWABLE_PATH, contributions["to_update"], PNG_OUTPUT_FOLDER)
     renamed_drawables = []
     new_drawables = contributions["new"] + renamed_drawables
-    # print("Converting svgs to png...")
-    # convert_svg(
-    #     SVG_FOLDER, PNG_OUTPUT_FOLDER,
-    #     [x["drawable"] for x in contributions["new"]] +
-    #     contributions["to_update"])
+    print("Converting svgs to png...")
+    convert_svg(
+        SVG_FOLDER, PNG_OUTPUT_FOLDER,
+        [x["drawable"] for x in contributions["new"]] +
+        contributions["to_update"])
+    print("Merging new drawables...")
     merge_drawables(DRAWABLE_PATH, new_drawables)
-    # duplicate_file(DRAWABLE_PATH, DRAWABLE_CLONE_PATH)
-    # create_updated_appfilters(APPFILTER_PATH, contributions)
-    # duplicate_file(APPFILTER_PATH, APPFILTER_CLONE_PATH)
+    duplicate_file(DRAWABLE_PATH, DRAWABLE_CLONE_PATH)
+    print("Creating updated appfilters...")
+    create_updated_appfilters(APPFILTER_PATH, contributions["new"])
+    duplicate_file(APPFILTER_PATH, APPFILTER_CLONE_PATH)
     # create_theme_resources(APPFILTER_PATH) #lets see if we even need this
-    # clean contributions.json
+    print("Cleaning contributions.json...")
+    with open(CONTRIBUTIONS_PATH, 'w') as f:
+        json.dump([], f)
 
 
 if __name__ == "__main__":
