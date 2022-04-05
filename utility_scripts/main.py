@@ -42,16 +42,17 @@ def duplicate_file(source, target):
             target_file.write(source_file.read())
 
 
-def parse_contributions(cotributions_path):
-    with open(cotributions_path, 'r') as f:
+def parse_contributions(contributions_path):
+    with open(contributions_path, 'r') as f:
         data = json.load(f)
         return {
-            "new": [x for x in data if x["drawable"] is not None],
-            "to_update": [x for x in data if x["update_drawable"] is None],
+            "new": [x for x in data if "drawable" in x],
+            "to_update": [x for x in data if "update_drawable" in x],
         }
 
 
 def update_requests():
+    print("Parsing emails...")
     parse_mails(
         MAIL_FOLDER, REQUESTS_PATH, UPDATABLE_PATH, APPFILTER_PATH,
         REQUEST_PER_PERSON_LIMIT, MONTHS_LIMIT,
@@ -60,15 +61,17 @@ def update_requests():
 
 def prepare_release():
     contributions = parse_contributions(CONTRIBUTIONS_PATH)
-    new_drawables = contributions["new"] + [x["new_drawable"]
-                                            for x in contributions["to_update"]]
-    renamed_drawables = move_outdated_drawables(contributions["to_update"])
-    convertSVG(SVG_FOLDER, DRAWABLE_PATH, new_drawables)
-    merge_drawables(DRAWABLE_PATH, new_drawables, renamed_drawables)
-    duplicate_file(DRAWABLE_PATH, DRAWABLE_CLONE_PATH)
-    create_updated_appfilters(APPFILTER_PATH, contributions)
-    duplicate_file(APPFILTER_PATH, APPFILTER_CLONE_PATH)
-	# create_theme_resources(APPFILTER_PATH) #lets see if we even need this
+    renamed_drawables = move_outdated_drawables(
+        DRAWABLE_PATH, contributions["to_update"], PNG_OUTPUT_FOLDER)
+    new_drawables = contributions["new"] + renamed_drawables
+    print(new_drawables)
+    # print("Converting svgs to png...")
+    # convertSVG(SVG_FOLDER, DRAWABLE_PATH, new_drawables)
+    # merge_drawables(DRAWABLE_PATH, new_drawables)
+    # duplicate_file(DRAWABLE_PATH, DRAWABLE_CLONE_PATH)
+    # create_updated_appfilters(APPFILTER_PATH, contributions)
+    # duplicate_file(APPFILTER_PATH, APPFILTER_CLONE_PATH)
+    # create_theme_resources(APPFILTER_PATH) #lets see if we even need this
 
 
 if __name__ == "__main__":

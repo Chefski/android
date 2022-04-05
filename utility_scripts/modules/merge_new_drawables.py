@@ -1,57 +1,84 @@
-import sys
 import re
+from bs4 import BeautifulSoup as bs
+from iteration_utilities import unique_everseen
 
 
-def main(drawable_file, new_drawables, renamed_drawables):
+def createTag(entry):
+    tag = bs.new_tag("item")
+    tag.attrs['drawable'] = entry["drawable"]
+    tag.attrs['name'] = entry["name"]
+    return tag
+
+
+def main(drawable_file, new_drawables):
     with open(drawable_file) as file:
-        lines = file.readlines()
-        drawables = []
-        google = []
-        folder = []
-        drawable_regex = re.compile(r'drawable="([\w_]+)"')
+        lines = file.read()
+        drawables = {
+            "google": {},
+            "folder": {},
+            "calendar": {},
+            "#": {},
+        }
 
-        # collect existing drawables
-        for line in lines:
-            drawable = re.search(drawable_regex, line)
-            if drawable:
-                if drawable.groups(0)[0].startswith('google'):
-                    google.append(drawable.groups(0)[0])
-                elif drawable.groups(0)[0].startswith('folder'):
-                    folder.append(drawable.groups(0)[0])
-                else:
-                    drawables.append(drawable.groups(0)[0])
+        xml = bs(lines, 'xml')
+        existing_drawables = xml.find_all('item')
 
-        # remove duplicates and sort
-        drawables = list(set(drawables + new_drawables + renamed_drawables))
-        drawables.sort()
-        google = list(set(google))
-        google.sort()
-        folder = list(set(folder))
-        folder.sort()
+        drawables = {**existing_drawables, **new_drawables}
+        drawables = unique_everseen(
+            drawables, key=lambda x: frozenset(x.items()))
 
-        # build
-        output = '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n<version>1</version>\n\n\t<category title="New" />\n\t'
+        # split into groups
+        for drawable in drawables:
+            if drawable["drawable"].startswith("google_"):
+                drawables["google"][drawable["drawable"]] = drawable
+                drawables.remove(drawable)
+            elif drawable["drawable"].startswith("folder_"):
+                drawables["folder"][drawable["drawable"]] = drawable
+                drawables.remove(drawable)
+            elif (drawable["drawable"].contains("calendar") and drawables.find(drawable["drawable"] + "_1")) or (drawable["drawable"].contains("calendar") and drawable["drawable"][-1].isdigit()):
+                drawables["calendar"][drawable["drawable"]] = drawable
+                drawables.remove(drawable)
+            elif drawable["drawable"][0].isnumeric():
+                drawables["#"][drawable["drawable"]] = drawable
+                drawables.remove(drawable)
+            else:
+                drawables[drawable["name"][0].upper()][drawable
+                                                       ["drawable"]] = drawable
+
+        # sort groups internally
+        for group in drawables:
+            drawables[group] = sorted(
+                drawables[group].items(), key=lambda x: x[1]["name"])
+
+        output = bs(features="xml")
+        resources = bs.new_tag("resources")
+
+        resources.append(bs.new_tag("category", name="New"))
         for entry in new_drawables:
-            output += '<item drawable="%s" />\n\t' % entry
+            tag = createTag(entry)
+            resources.append(tag)
 
-        output += '\n\t<category title="Google" />\n\t'
-        for entry in google:
-            output += '<item drawable="%s" />\n\t' % entry
+        resources.append(bs.new_tag("category", name="Google"))
+        for entry in drawables["google"]:
+            tag = createTag(entry)
+            resources.append(tag)
+        drawables.remove("google")
 
-        output += '\n\t<category title="Folders" />\n\t'
-        for entry in folder:
-            output += '<item drawable="%s" />\n\t' % entry
+        resources.append(bs.new_tag("category", name="Folder"))
+        for entry in drawables["folder"]:
+            tag = createTag(entry)
+            resources.append(tag)
+        drawables.remove("folder")
 
-        output += '\n\t<category title="A" />\n\t'
-        letter = "a"
+        # sort drawables by key for rest of the groups
+        drawables = sorted(drawables.items(), key=lambda x: x[0])
 
-        # iterate alphabet
-        for entry in drawables:
-            if not entry.startswith(letter):
-                letter = chr(ord(letter) + 1)
-                output += '\n\t<category title="%s" />\n\t' % letter.upper()
-            output += '<item drawable="%s" />\n\t' % entry
+        for group in drawables:
+            resources.append(bs.new_tag("category", name=group[0]))
+            for entry in group[1]:
+                tag = createTag(entry)
+                resources.append(tag)
 
-        output += "\n</resources>"
-
-        file.write(output)
+        output.append(resources)
+        print(output.prettify())
+        file.write(str(output))

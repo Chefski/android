@@ -7,7 +7,7 @@ In case you want to contribute to Delta by providing icons please do so by creat
 		{
 			"activity": "com.example.app/com.example.app.MainActivity",
 			"drawable": "example_app", // with file extension omitted
-			"label": "Example App",
+			"name": "Example App"
 		}
 	```
 - If you are updating the main icon of an application please add to `contributions.json` in the following way:
