@@ -1,5 +1,5 @@
 -------------------------------------------------------
-2291 Requested Apps Pending (Updated 4 April 2022)
+2268 Requested Apps Pending (Updated 13 April 2022)
 -------------------------------------------------------
 
 GOMO PH
@@ -379,12 +379,6 @@ com.motorola.gamemode/com.motorola.gamemode.ui.launcher.main.GameCenterActivity
 https://play.google.com/store/apps/details?id=com.motorola.gamemode
 Requested 5 times
 Last requested 1647984736.0
-	
-Mobile
-tc.tc.scsm.phonegap/com.passportparking.mobile.ParkMontrealApp
-https://play.google.com/store/apps/details?id=tc.tc.scsm.phonegap
-Requested 5 times
-Last requested 1648449696.0
 	
 YAP
 it.nexi.yap/it.nexi.yap.sections.splash.SplashActivity
@@ -3008,12 +3002,6 @@ https://play.google.com/store/apps/details?id=com.dstvmobile.android
 Requested 2 times
 Last requested 1637028759.0
 	
-MySubaru
-com.subaru.telematics.app.remote/com.subaru.telematics.app.remote.MainActivity
-https://play.google.com/store/apps/details?id=com.subaru.telematics.app.remote
-Requested 2 times
-Last requested 1635729040.0
-	
 Sound Amplifier
 com.google.android.accessibility.soundamplifier/com.google.android.accessibility.soundamplifier.ui.SoundAmplifierSettingActivity
 https://play.google.com/store/apps/details?id=com.google.android.accessibility.soundamplifier
@@ -3506,12 +3494,6 @@ https://play.google.com/store/apps/details?id=com.xnview.hypocam
 Requested 2 times
 Last requested 1637629328.0
 	
-Geizhals
-at.geizhals.pv/at.geizhals.pv.GeizhalsSplashScreen
-https://play.google.com/store/apps/details?id=at.geizhals.pv
-Requested 2 times
-Last requested 1637120033.0
-	
 Cineplex
 com.fivemobile.cineplex/com.fivemobile.cineplex.MainActivity
 https://play.google.com/store/apps/details?id=com.fivemobile.cineplex
@@ -3589,12 +3571,6 @@ com.Vertifi.Mobile.P211391825/com.Vertifi.Mobile.MainActivity
 https://play.google.com/store/apps/details?id=com.Vertifi.Mobile.P211391825
 Requested 2 times
 Last requested 1640146098.0
-	
-Master
-com.AlfaBravoInc.CombatMaster/com.unity3d.player.UnityPlayerActivity
-https://play.google.com/store/apps/details?id=com.AlfaBravoInc.CombatMaster
-Requested 2 times
-Last requested 1635735144.0
 	
 Alkitab
 yuku.alkitab/yuku.alkitab.base.IsiActivity
@@ -5000,12 +4976,6 @@ https://play.google.com/store/apps/details?id=com.urk.resintimer
 Requested 1 times
 Last requested 1635989858.0
 	
-Glosbe
-com.cloud_inside.mobile.glosbedictionary/com.cloud_inside.mobile.glosbedictionary.MainActivity
-https://play.google.com/store/apps/details?id=com.cloud_inside.mobile.glosbedictionary
-Requested 1 times
-Last requested 1635724709.0
-	
 Pocket
 com.muslim.prayertimes.qibla.app/com.islam.muslim.qibla.SplashActivity
 https://play.google.com/store/apps/details?id=com.muslim.prayertimes.qibla.app
@@ -5089,12 +5059,6 @@ com.PiguinSoft.CafeRacer/com.unity3d.player.UnityPlayerNativeActivity
 https://play.google.com/store/apps/details?id=com.PiguinSoft.CafeRacer
 Requested 1 times
 Last requested 1636595462.0
-	
-(클라우드)
-lg.uplusbox/lg.uplusbox.TitleActivity
-https://play.google.com/store/apps/details?id=lg.uplusbox
-Requested 1 times
-Last requested 1635736461.0
 	
 AladdinConnect
 com.geniecompany.AladdinConnect/com.genie.gdocntl.welcome.SplashActivity
@@ -13436,12 +13400,6 @@ https://play.google.com/store/apps/details?id=pdf.tap.scanner
 Requested 1 times
 Last requested 1645333656.0
 	
-measure
-com.samsung.android.ruler/com.samsung.android.ruler.main.rulerPreviewActivity
-https://play.google.com/store/apps/details?id=com.samsung.android.ruler
-Requested 1 times
-Last requested 1647659162.0
-	
 Analyzer
 com.farproc.wifi.analyzer/com.farproc.wifi.analyzer.MainScreen
 https://play.google.com/store/apps/details?id=com.farproc.wifi.analyzer
@@ -13633,10 +13591,4 @@ com.recloak.littlealchemyhints/com.recloak.littlealchemyhints.LittleHints
 https://play.google.com/store/apps/details?id=com.recloak.littlealchemyhints
 Requested 0 times
 Last requested 1648209201.0
-	
-Lab
-com.samruston.converter/com.samruston.converter.ui.MainActivity
-https://play.google.com/store/apps/details?id=com.samruston.converter
-Requested -1 times
-Last requested 1647970196.0
 	

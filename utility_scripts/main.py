@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
 # make sure to run "pip install -r requirements.txt" before running this script
+# additional package needed for linux: lxml
 #
 # you'll need libvips for this, which can be installed by the docs at:
 # https://www.libvips.org/install.html
 
-from msilib.schema import DuplicateFile
 from multiprocessing.spawn import prepare
 from modules.delta_email_parser import main as parse_mails
 from modules.merge_new_drawables import main as merge_drawables

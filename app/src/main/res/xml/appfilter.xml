@@ -7591,4 +7591,7 @@
  <item component="ComponentInfo{com.samsung.android.ruler/com.android.camera.CameraLauncher}" drawable="camera"/>
  <item component="ComponentInfo{com.samsung.android.ruler/com.android.camera.CameraLauncher}" drawable="camera"/>
  <item component="ComponentInfo{at.geizhals.pv/at.geizhals.pv.GeizhalsSplashScreen}" drawable="geizhals"/>
+ <item component="ComponentInfo{aaa.test/aaa.test.Splash}" drawable="aaa"/>
+ <item component="ComponentInfo{bbb.test/bbb.test.Splash}" drawable="bbb"/>
+ <item component="ComponentInfo{ccc.test/ccc.test.Splash}" drawable="ccc"/>
 </resources>

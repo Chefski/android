@@ -1,10 +1,1 @@
-[
-	{
-		"update_drawable": "infinity"
-	},
-	{
-		"activity": "at.geizhals.pv/at.geizhals.pv.GeizhalsSplashScreen",
-		"drawable": "geizhals",
-		"name": "Geizhals"
-	}
-]
+[]

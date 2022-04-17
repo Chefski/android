@@ -43,3 +43,12 @@ com.tommasoberlose.anotherwidget/com.tommasoberlose.anotherwidget.ui.activities.
 com
 .linkit.bimatri/com.linkit.bimatri.presentation.activity.SplashScreenActivity
 
+Mobile
+tc.tc.scsm.phonegap/com.passportparking.mobile.ParkMontrealApp
+
+Geizhals
+at.geizhals.pv/at.geizhals.pv.GeizhalsSplashScreen
+
+measure
+com.samsung.android.ruler/com.samsung.android.ruler.main.rulerPreviewActivity
+
